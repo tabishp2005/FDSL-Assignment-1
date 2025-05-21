@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+#define SIZE 100
+
+struct Array {
+    int data[SIZE];
+    int count;
+};
+
+struct Array arr = { .count = 0 };
+
+void insert(int value) {
+    if (arr.count < SIZE) {
+        arr.data[arr.count] = value;
+        arr.count++;
+    }
+}
+
+void delete(int value) {
+    int i, found = 0;
+    for (i = 0; i < arr.count; i++) {
+        if (arr.data[i] == value) {
+            found = 1;
+            break;
+        }
+    }
+    if (found) {
+        for (; i < arr.count - 1; i++)
+            arr.data[i] = arr.data[i + 1];
+        arr.count--;
+    }
+}
+
+void display() {
+    for (int i = 0; i < arr.count; i++)
+        printf("%d ", arr.data[i]);
+    printf("\n");
+}
+
+int main() {
+    insert(10);
+    insert(20);
+    insert(30);
+    display();
+    delete(20);
+    display();
+    return 0;
+}
